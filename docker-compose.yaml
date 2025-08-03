@@ -1,0 +1,15 @@
+services:
+  ansible-control:
+    hostname: ansible-control
+    container_name: ansible-control
+    image: ansible-control:latest
+    ports: 
+     - 22:22
+     - 7681:7681
+    privileged: true
+    networks:
+     - bridgenetwork
+
+networks:
+  bridgenetwork:
+    name: bridgenetwork
