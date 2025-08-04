@@ -12,7 +12,5 @@ RUN apt-get install -y --no-install-recommends \
 RUN apt-get install -y --no-install-recommends \
     ansible
 
-COPY ansible.cfg /etc/ansible/ansible.cfg
-
 ENTRYPOINT [ "ttyd" ]
 CMD [ "-p", "7681", "--writable", "bash", "-li" ]

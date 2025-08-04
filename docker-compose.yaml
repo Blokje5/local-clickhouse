@@ -7,6 +7,33 @@ services:
      - 22:22
      - 7681:7681
     privileged: true
+    volumes:
+      - ${PWD}/config/ansible-control:/etc/ansible
+    networks:
+     - bridgenetwork
+  clickhouse-01:
+    hostname: clickhouse-01
+    container_name: clickhouse-01
+    image: ubuntu:24.04
+    ports:
+     - 2222:22
+     - 8123:8123
+     - 9000:9000
+    volumes:
+     - ${PWD}/data/fs/clickhouse-01:/var/lib/clickhouse
+    networks:
+     - bridgenetwork
+  
+  clickhouse-02:
+    hostname: clickhouse-02
+    container_name: clickhouse-02
+    image: ubuntu:24.04
+    ports:
+     - 2223:22
+     - 8124:8124
+     - 9001:9001
+    volumes:
+     - ${PWD}/data/fs/clickhouse-02:/var/lib/clickhouse
     networks:
      - bridgenetwork
 
