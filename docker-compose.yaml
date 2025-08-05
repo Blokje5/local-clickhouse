@@ -9,6 +9,7 @@ services:
     privileged: true
     volumes:
       - ${PWD}/config/ansible-control:/etc/ansible
+      - ${PWD}/playbook:/playbook
     networks:
      - bridgenetwork
   clickhouse-01:

@@ -1,0 +1,23 @@
+---
+- name: Grep for dynamic MOTD
+  shell: "ls /etc/update-motd.d/*"
+  register: motds
+  changed_when: false
+  failed_when: false
+
+- name: Set list of files to delete
+  set_fact:
+    files_to_delete: "{{ motds.stdout_lines }}"
+
+- name: Remove dynamic MOTD
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop: "{{ files_to_delete }}"
+  when: files_to_delete is defined
+
+- name: Set up MOTD
+  ansible.builtin.template:
+    src: motd.j2
+    dest: /etc/motd
+  tags: motd

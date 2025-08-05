@@ -24,6 +24,7 @@ down:
 # source .venv/bin/activate
 virtualenv:
 	python3 -m venv .venv
-	.venv/bin/pip install -r requirements.txt
+	source .venv/bin/activate
+	.venv/bin/pip3 install -r requirements.txt
 
 	

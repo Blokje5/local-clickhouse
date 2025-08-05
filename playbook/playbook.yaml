@@ -1,0 +1,16 @@
+---
+
+- name: Test Task
+  hosts: clickhouse
+  tasks:
+    - name: Ping the ClickHouse nodes
+      ping:
+      register: ping_result
+
+    - name: Display ping results
+      debug:
+        var: ping_result
+
+    - name: Set up MOTD
+      import_role:
+        name: MOTD
