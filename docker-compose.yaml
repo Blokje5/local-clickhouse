@@ -14,7 +14,7 @@ services:
   clickhouse-01:
     hostname: clickhouse-01
     container_name: clickhouse-01
-    image: ubuntu:24.04
+    image: managed-nodes-base:latest
     ports:
      - 2222:22
      - 8123:8123
@@ -23,11 +23,10 @@ services:
      - ${PWD}/data/fs/clickhouse-01:/var/lib/clickhouse
     networks:
      - bridgenetwork
-  
   clickhouse-02:
     hostname: clickhouse-02
     container_name: clickhouse-02
-    image: ubuntu:24.04
+    image: managed-nodes-base:latest
     ports:
      - 2223:22
      - 8124:8124
