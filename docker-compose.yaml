@@ -3,7 +3,7 @@ services:
     hostname: ansible-control
     container_name: ansible-control
     image: ansible-control:latest
-    ports: 
+    ports:
      - 22:22
      - 7681:7681
     privileged: true
@@ -34,6 +34,36 @@ services:
      - 9001:9001
     volumes:
      - ${PWD}/data/fs/clickhouse-02:/var/lib/clickhouse
+    networks:
+     - bridgenetwork
+  keeper-01:
+    hostname: keeper-01
+    container_name: keeper-01
+    image: managed-nodes-base:latest
+    ports:
+     - 2224:22
+    volumes:
+     - ${PWD}/data/fs/keeper-01:/var/lib/clickhouse
+    networks:
+     - bridgenetwork
+  keeper-02:
+    hostname: keeper-02
+    container_name: keeper-02
+    image: managed-nodes-base:latest
+    ports:
+     - 2225:22
+    volumes:
+     - ${PWD}/data/fs/keeper-02:/var/lib/clickhouse
+    networks:
+     - bridgenetwork
+  keeper-03:
+    hostname: keeper-03
+    container_name: keeper-03
+    image: managed-nodes-base:latest
+    ports:
+     - 2226:22
+    volumes:
+     - ${PWD}/data/fs/keeper-03:/var/lib/clickhouse
     networks:
      - bridgenetwork
 

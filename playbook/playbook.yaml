@@ -1,9 +1,9 @@
 ---
 
 - name: Test Task
-  hosts: clickhouse
+  hosts: all
   tasks:
-    - name: Ping the ClickHouse nodes
+    - name: Ping all nodes
       ping:
       register: ping_result
 
@@ -14,3 +14,11 @@
     - name: Set up MOTD
       import_role:
         name: MOTD
+    - name: Install required packages
+      import_role:
+        name: required-packages
+
+    - name: Set up ClickHouse
+      import_role:
+        name: clickhouse
+

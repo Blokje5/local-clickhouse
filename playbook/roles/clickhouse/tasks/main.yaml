@@ -1,0 +1,6 @@
+---
+- name: Install ClickHouse
+  import_tasks: install.yaml
+
+- name: Configure ClickHouse Keeper
+  import_tasks: keeper.yaml

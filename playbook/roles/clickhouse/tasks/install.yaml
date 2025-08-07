@@ -1,0 +1,20 @@
+---
+- name: Install Clickhouse
+  block:
+    - name: Add ClickHouse repository key
+      ansible.builtin.apt_key:
+        url: https://packages.clickhouse.com/rpm/lts/repodata/repomd.xml.key
+        state: present
+
+    - name: Add ClickHouse repository
+      ansible.builtin.apt_repository:
+        repo: 'deb [signed-by=/etc/apt/trusted.gpg] https://packages.clickhouse.com/deb stable main'
+        state: present
+
+    - name: Install ClickHouse packages
+      apt:
+        name:
+          - clickhouse-server
+          - clickhouse-client
+        state: present
+        update_cache: yes

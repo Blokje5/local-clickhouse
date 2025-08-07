@@ -1,0 +1,8 @@
+---
+- name: Install required packages
+  block:
+    - name: Install gpg
+      ansible.builtin.package:
+        name: gpg
+        state: present
+    

@@ -1,0 +1,36 @@
+---
+- name: Run Clickhouse Keeper
+  when: role == "keeper"
+  block:
+    - name: Ensure Keeper config directory exists
+      ansible.builtin.file:
+        path: /etc/clickhouse-keeper/keeper_config.d
+        state: directory
+        owner: clickhouse
+        group: clickhouse
+        mode: '0755'
+
+    - name: Configure ClickHouse Keeper
+      ansible.builtin.template:
+        src: 01_keeper.xml.j2
+        dest: /etc/clickhouse-keeper/keeper_config.d/keeper.xml
+        owner: clickhouse
+        group: clickhouse
+        mode: '0644'
+    - name: Add log out file
+      ansible.builtin.file:
+        path: /var/log/clickhouse-keeper.out
+        state: touch
+        owner: clickhouse
+        group: clickhouse
+        mode: '0644'
+
+    # TODO: Clickhouse is particular about the user running the service
+    # I need to figure out how to run it as the clickhouse user
+    # And make sure all directories are owned by clickhouse.
+    - name: Start ClickHouse Keeper service
+      ansible.builtin.shell: |
+        sudo -u ansible nohup /usr/bin/clickhouse-keeper > /var/log/clickhouse-keeper.out 2>&1 &
+        echo $! > /var/run/clickhouse-keeper.pid
+      args:
+        executable: /bin/bash
