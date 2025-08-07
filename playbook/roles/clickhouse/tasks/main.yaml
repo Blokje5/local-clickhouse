@@ -4,3 +4,6 @@
 
 - name: Configure ClickHouse Keeper
   import_tasks: keeper.yaml
+
+- name: Configure ClickHouse Server
+  import_tasks: clickhouse.yaml
